@@ -1,6 +1,7 @@
 package com.example.springrecipebook.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Recipe {
@@ -24,6 +25,10 @@ public class Recipe {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes note;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
+
 
     public Long getId() {
         return id;
@@ -103,5 +108,13 @@ public class Recipe {
 
     public void setNote(Notes note) {
         this.note = note;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
