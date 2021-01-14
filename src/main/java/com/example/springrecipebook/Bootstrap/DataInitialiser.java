@@ -4,6 +4,7 @@ import com.example.springrecipebook.Repositories.CategoryRepository;
 import com.example.springrecipebook.Repositories.RecipeRepository;
 import com.example.springrecipebook.Repositories.UnitOfMeasureRepository;
 import com.example.springrecipebook.model.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import java.util.*;
 import static com.example.springrecipebook.enums.Difficulty.EASY;
 import static com.example.springrecipebook.enums.Difficulty.MEDIUM;
 
+@Slf4j
 @Component
 public class DataInitialiser implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -42,7 +44,9 @@ public class DataInitialiser implements ApplicationListener<ContextRefreshedEven
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        log.debug("In the data initialiser");
         recipeRepository.saveAll(getRecipes());
+        log.debug("Loading bootstrap data");
     }
 
     private List<Recipe> getRecipes() {
