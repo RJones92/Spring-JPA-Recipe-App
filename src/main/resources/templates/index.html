@@ -3,35 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Recipe Home</title>
+
+    <!--    Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!--    Bootstrap JS-->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
 </head>
 <body>
-<h1>My Recipe's</h1>
-
-<table>
-    <thead>
-        <tr>
-            <th>Description</th>
-            <th>Directions</th>
-            <th>Difficulty</th>
-            <th>Cook time</th>
-            <th>Prep time</th>
-            <th>Servings</th>
-            <th>URL</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="recipe: ${recipes}">
-            <td th:text="${recipe.description}"></td>
-            <td th:text="${recipe.directions}"></td>
-            <td th:text="${recipe.difficulty}"></td>
-            <td th:text="${recipe.description}"></td>
-            <td th:text="${recipe.cookTime}"></td>
-            <td th:text="${recipe.prepTime}"></td>
-            <td th:text="${recipe.servings}"></td>
-            <td th:text="${recipe.url}"></td>
-        </tr>
-    </tbody>
-</table>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row justify-content-md-center">
+        <h1>My Recipe's</h1>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-6">
+            <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:remove="all">
+                        <td th:text="${recipe.id}">111</td>
+                        <td th:text="${recipe.description}">Example description 1</td>
+                    </tr>
+                    <tr th:remove="all">
+                        <td th:text="${recipe.id}">222</td>
+                        <td th:text="${recipe.description}">Example description 2</td>
+                    </tr>
+                    <tr th:each="recipe: ${recipes}">
+                        <td th:text="${recipe.id}">333</td>
+                        <td th:text="${recipe.description}">Example description 3</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
