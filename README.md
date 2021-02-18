@@ -1,3 +1,5 @@
+Latest build status: [![RJones92](https://circleci.com/gh/RJones92/Spring-JPA-Recipe-App.svg?style=svg)](https://app.circleci.com/pipelines/github/RJones92/Spring-JPA-Recipe-App)
+
 # Spring-JPA-Recipe-App
 Technologies: Spring (via Spring Boot), Spring Data JPA, H2 DB, Hibernate, ThymeLeaf
 
