@@ -127,14 +127,14 @@ public class DataInitialiser implements ApplicationListener<ContextRefreshedEven
         guacamoleNotes.setRecipeNotes("Be careful handling chillies if using. Wash your hands thoroughly after handling and do not touch your eyes or the area near your eyes with your hands for several hours.");
         guacamole.setNotes(guacamoleNotes);
 
-        guacamole.getIngredients().add(new Ingredient("ripe avocados", new BigDecimal(2), uomMap.get(EACH)));
-        guacamole.getIngredients().add(new Ingredient("Kosher salt", new BigDecimal(".5"), uomMap.get(TEASPOON)));
-        guacamole.getIngredients().add(new Ingredient("fresh lime juice or lemon juice", new BigDecimal(2), uomMap.get(TABLESPOON)));
-        guacamole.getIngredients().add(new Ingredient("minced red onion or thinly sliced green onion", new BigDecimal(2), uomMap.get(TABLESPOON)));
-        guacamole.getIngredients().add(new Ingredient("serrano chiles, stems and seeds removed, minced", new BigDecimal(2), uomMap.get(EACH)));
-        guacamole.getIngredients().add(new Ingredient("Cilantro", new BigDecimal(2), uomMap.get(TABLESPOON)));
-        guacamole.getIngredients().add(new Ingredient("freshly grated black pepper", new BigDecimal(2), uomMap.get(DASH)));
-        guacamole.getIngredients().add(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(".5"), uomMap.get(EACH)));
+        guacamole.addIngredient(new Ingredient("ripe avocados", new BigDecimal(2), uomMap.get(EACH)));
+        guacamole.addIngredient(new Ingredient("Kosher salt", new BigDecimal(".5"), uomMap.get(TEASPOON)));
+        guacamole.addIngredient(new Ingredient("fresh lime juice or lemon juice", new BigDecimal(2), uomMap.get(TABLESPOON)));
+        guacamole.addIngredient(new Ingredient("minced red onion or thinly sliced green onion", new BigDecimal(2), uomMap.get(TABLESPOON)));
+        guacamole.addIngredient(new Ingredient("serrano chiles, stems and seeds removed, minced", new BigDecimal(2), uomMap.get(EACH)));
+        guacamole.addIngredient(new Ingredient("Cilantro", new BigDecimal(2), uomMap.get(TABLESPOON)));
+        guacamole.addIngredient(new Ingredient("freshly grated black pepper", new BigDecimal(2), uomMap.get(DASH)));
+        guacamole.addIngredient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(".5"), uomMap.get(EACH)));
 
         guacamole.getCategories().add(categoryMap.get(AMERICAN));
         guacamole.getCategories().add(categoryMap.get(MEXICAN));
@@ -171,25 +171,25 @@ public class DataInitialiser implements ApplicationListener<ContextRefreshedEven
         tacoNotes.setRecipeNotes("Look for ancho chile powder with the Mexican ingredients at your grocery store, on buy it online. (If you can't find ancho chili powder, you replace the ancho chili, the oregano, and the cumin with 2 1/2 tablespoons regular chili powder, though the flavor won't be quite the same.)");
         taco.setNotes(tacoNotes);
 
-        taco.getIngredients().add(new Ingredient("Ancho Chili Powder", new BigDecimal(2), uomMap.get(TABLESPOON)));
-        taco.getIngredients().add(new Ingredient("Dried Oregano", new BigDecimal(1), uomMap.get(TEASPOON)));
-        taco.getIngredients().add(new Ingredient("Dried Cumin", new BigDecimal(1), uomMap.get(TEASPOON)));
-        taco.getIngredients().add(new Ingredient("Sugar", new BigDecimal(1), uomMap.get(TEASPOON)));
-        taco.getIngredients().add(new Ingredient("Salt", new BigDecimal(".5"), uomMap.get(TEASPOON)));
-        taco.getIngredients().add(new Ingredient("Clove of Garlic, Choppedr", new BigDecimal(1), uomMap.get(EACH)));
-        taco.getIngredients().add(new Ingredient("finely grated orange zestr", new BigDecimal(1), uomMap.get(TABLESPOON)));
-        taco.getIngredients().add(new Ingredient("fresh-squeezed orange juice", new BigDecimal(3), uomMap.get(TABLESPOON)));
-        taco.getIngredients().add(new Ingredient("Olive Oil", new BigDecimal(2), uomMap.get(TABLESPOON)));
-        taco.getIngredients().add(new Ingredient("boneless chicken thighs", new BigDecimal(4), uomMap.get(TABLESPOON)));
-        taco.getIngredients().add(new Ingredient("small corn tortillasr", new BigDecimal(8), uomMap.get(EACH)));
-        taco.getIngredients().add(new Ingredient("packed baby arugula", new BigDecimal(3), uomMap.get(CUP)));
-        taco.getIngredients().add(new Ingredient("medium ripe avocados, slic", new BigDecimal(2), uomMap.get(EACH)));
-        taco.getIngredients().add(new Ingredient("radishes, thinly sliced", new BigDecimal(4), uomMap.get(EACH)));
-        taco.getIngredients().add(new Ingredient("cherry tomatoes, halved", new BigDecimal(".5"), uomMap.get(PINT)));
-        taco.getIngredients().add(new Ingredient("red onion, thinly sliced", new BigDecimal(".25"), uomMap.get(EACH)));
-        taco.getIngredients().add(new Ingredient("Roughly chopped cilantro", new BigDecimal(4), uomMap.get(EACH)));
-        taco.getIngredients().add(new Ingredient("cup sour cream thinned with 1/4 cup milk", new BigDecimal(4), uomMap.get(CUP)));
-        taco.getIngredients().add(new Ingredient("lime, cut into wedges", new BigDecimal(4), uomMap.get(EACH)));
+        taco.addIngredient(new Ingredient("Ancho Chili Powder", new BigDecimal(2), uomMap.get(TABLESPOON)));
+        taco.addIngredient(new Ingredient("Dried Oregano", new BigDecimal(1), uomMap.get(TEASPOON)));
+        taco.addIngredient(new Ingredient("Dried Cumin", new BigDecimal(1), uomMap.get(TEASPOON)));
+        taco.addIngredient(new Ingredient("Sugar", new BigDecimal(1), uomMap.get(TEASPOON)));
+        taco.addIngredient(new Ingredient("Salt", new BigDecimal(".5"), uomMap.get(TEASPOON)));
+        taco.addIngredient(new Ingredient("Clove of Garlic, Choppedr", new BigDecimal(1), uomMap.get(EACH)));
+        taco.addIngredient(new Ingredient("finely grated orange zestr", new BigDecimal(1), uomMap.get(TABLESPOON)));
+        taco.addIngredient(new Ingredient("fresh-squeezed orange juice", new BigDecimal(3), uomMap.get(TABLESPOON)));
+        taco.addIngredient(new Ingredient("Olive Oil", new BigDecimal(2), uomMap.get(TABLESPOON)));
+        taco.addIngredient(new Ingredient("boneless chicken thighs", new BigDecimal(4), uomMap.get(TABLESPOON)));
+        taco.addIngredient(new Ingredient("small corn tortillasr", new BigDecimal(8), uomMap.get(EACH)));
+        taco.addIngredient(new Ingredient("packed baby arugula", new BigDecimal(3), uomMap.get(CUP)));
+        taco.addIngredient(new Ingredient("medium ripe avocados, slic", new BigDecimal(2), uomMap.get(EACH)));
+        taco.addIngredient(new Ingredient("radishes, thinly sliced", new BigDecimal(4), uomMap.get(EACH)));
+        taco.addIngredient(new Ingredient("cherry tomatoes, halved", new BigDecimal(".5"), uomMap.get(PINT)));
+        taco.addIngredient(new Ingredient("red onion, thinly sliced", new BigDecimal(".25"), uomMap.get(EACH)));
+        taco.addIngredient(new Ingredient("Roughly chopped cilantro", new BigDecimal(4), uomMap.get(EACH)));
+        taco.addIngredient(new Ingredient("cup sour cream thinned with 1/4 cup milk", new BigDecimal(4), uomMap.get(CUP)));
+        taco.addIngredient(new Ingredient("lime, cut into wedges", new BigDecimal(4), uomMap.get(EACH)));
 
         taco.getCategories().add(categoryMap.get(AMERICAN));
         taco.getCategories().add(categoryMap.get(MEXICAN));
