@@ -20,9 +20,12 @@ public class RecipeController {
 
     @RequestMapping("/show/{recipeId}")
     public String getRecipeById(Model model, @PathVariable Long recipeId) {
+        log.info("Getting individual recipe page");
 
         model.addAttribute("recipe", recipeService.getRecipeById(recipeId));
 
+        log.info("Added recipe data to the model.");
+        log.info("Now sending recipe to Thymeleaf");
         return "recipe/show";
     }
 }
