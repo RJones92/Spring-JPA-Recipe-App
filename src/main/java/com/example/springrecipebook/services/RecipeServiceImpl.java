@@ -1,9 +1,13 @@
 package com.example.springrecipebook.services;
 
 import com.example.springrecipebook.Repositories.RecipeRepository;
+import com.example.springrecipebook.commands.RecipeCommand;
+import com.example.springrecipebook.mappers.RecipeMapper;
 import com.example.springrecipebook.model.Recipe;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -13,6 +17,9 @@ import java.util.Set;
 @Service
 public class RecipeServiceImpl implements RecipeService {
     private final RecipeRepository recipeRepository;
+
+    @Autowired
+    private RecipeMapper recipeMapper;
 
     public RecipeServiceImpl(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
@@ -37,7 +44,16 @@ public class RecipeServiceImpl implements RecipeService {
         };
 
         return recipeOptional.get();
+    }
 
+    @Override
+    @Transactional
+    public RecipeCommand saveRecipeCommand(RecipeCommand command) {
+        Recipe detachedRecipe = recipeMapper.recipeCommandToRecipe(command);
+
+        Recipe savedRecipe = recipeRepository.save(detachedRecipe);
+        log.debug("Saved recipe Id: {}", savedRecipe.getId());
+        return recipeMapper.recipeToRecipeCommand(savedRecipe);
     }
 
 }
