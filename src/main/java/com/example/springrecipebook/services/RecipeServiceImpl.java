@@ -41,9 +41,15 @@ public class RecipeServiceImpl implements RecipeService {
 
         if (recipeOptional.isEmpty()) {
             throw new RuntimeException("No recipe found with id:" + id);
-        };
+        }
 
         return recipeOptional.get();
+    }
+
+    @Override
+    @Transactional
+    public RecipeCommand findCommandById(Long id) {
+        return recipeMapper.recipeToRecipeCommand(getRecipeById(id));
     }
 
     @Override

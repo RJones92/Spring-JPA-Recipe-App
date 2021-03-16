@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/recipe")
 public class RecipeController {
-    private static final String SHOW_RECIPE_PATH = "/show/";
+    private static final String SHOW_RECIPE_PATH = "/show";
     private static final String ADD_NEW_RECIPE_PATH = "/new";
+    private static final String UPDATE_RECIPE_PATH = "/update";
 
     private final RecipeService recipeService;
 
@@ -23,21 +24,21 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @RequestMapping(SHOW_RECIPE_PATH + "/{recipeId}")
-    public String getRecipeById(Model model, @PathVariable Long recipeId) {
-        log.info("Getting individual recipe page");
-
-        model.addAttribute("recipe", recipeService.getRecipeById(recipeId));
-
-        log.info("Added recipe data to the model.");
-        log.info("Now sending recipe to Thymeleaf");
+    @RequestMapping("/{recipeId}" + SHOW_RECIPE_PATH)
+    public String getRecipeById(Model model, @PathVariable String recipeId) {
+        model.addAttribute("recipe", recipeService.getRecipeById(Long.valueOf(recipeId)));
         return "recipe/show";
     }
 
     @RequestMapping(ADD_NEW_RECIPE_PATH)
     public String addNewRecipe(Model model) {
         model.addAttribute("recipe", new RecipeCommand());
+        return "recipe/recipeForm";
+    }
 
+    @RequestMapping("/{recipeId}" + UPDATE_RECIPE_PATH)
+    public String updateRecipe(Model model, @PathVariable String recipeId) {
+        model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(recipeId)));
         return "recipe/recipeForm";
     }
 
@@ -45,8 +46,7 @@ public class RecipeController {
     @RequestMapping("/")
     public String postRecipe(@ModelAttribute RecipeCommand recipeCommand) {
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(recipeCommand);
-
-        return "redirect:/recipe" + SHOW_RECIPE_PATH + savedCommand.getId();
+        return "redirect:/recipe/" + savedCommand.getId() + SHOW_RECIPE_PATH;
     }
 
 }
