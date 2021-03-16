@@ -60,7 +60,7 @@ class RecipeControllerTest {
                 .andExpect(view().name("recipe/recipeForm"))
                 .andExpect(model().attributeExists("recipe"));
 
-        verify(recipeService, times(0)).getRecipeById(anyLong());
+        verifyNoInteractions(recipeService);
     }
 
     @Test
@@ -74,7 +74,9 @@ class RecipeControllerTest {
         mockMvc.perform(post("/recipe/")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/recipe/show/" + recipeCommand.getId()));
+                .andExpect(view().name("redirect:/recipe/" + recipeCommand.getId() + "/show"));
+
+        verify(recipeService, times(1)).saveRecipeCommand(any());
     }
 
 }
