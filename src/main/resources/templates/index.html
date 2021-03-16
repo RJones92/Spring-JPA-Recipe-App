@@ -50,12 +50,15 @@
                         <td>Example description 1</td>
                         <td><a href="">View</a></td>
                         <td><a href="">Update</a></td>
+                        <td><a href="">Delete</a></td>
+
                     </tr>
                     <tr th:remove="all">
                         <td>222</td>
                         <td>Example description 2</td>
                         <td><a href="">View</a></td>
                         <td><a href="">Update</a></td>
+                        <td><a href="">Delete</a></td>
                     </tr>
                     <tr th:each="recipe : ${recipes}">
                         <td th:text="${recipe.id}">333</td>

@@ -68,14 +68,14 @@ class RecipeControllerTest {
         RecipeCommand recipeCommand = new RecipeCommand();
         recipeCommand.setId(recipeId);
 
-        when(recipeService.findCommandById(recipeId)).thenReturn(recipeCommand);
+        when(recipeService.getCommandById(recipeId)).thenReturn(recipeCommand);
 
         mockMvc.perform(get("/recipe/" + recipeId + "/update"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/recipeForm"))
                 .andExpect(model().attributeExists("recipe"));
 
-        verify(recipeService, times(1)).findCommandById(anyLong());
+        verify(recipeService, times(1)).getCommandById(anyLong());
     }
 
     @Test
