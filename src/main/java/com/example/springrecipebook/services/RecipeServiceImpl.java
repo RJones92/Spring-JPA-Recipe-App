@@ -62,4 +62,8 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeMapper.recipeToRecipeCommand(savedRecipe);
     }
 
+    @Override
+    public void deleteRecipeById(Long id) {
+        recipeRepository.deleteById(id);
+    }
 }
