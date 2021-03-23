@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface IngredientMapper {
 
+    @Mapping(target = "recipeId", source = "ingredient.recipe.id")
     IngredientCommand ingredientToIngredientCommand(Ingredient ingredient);
 
     @Mapping(target = "recipe", ignore = true)

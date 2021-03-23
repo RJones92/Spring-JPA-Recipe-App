@@ -28,46 +28,41 @@
 <body>
 <div class="container-fluid" style="margin-top: 20px">
 <div class="row justify-content-md-center">
-    <h1>Ingredients</h1>
+    <h1>Ingredient</h1>
 </div>
 <div class="row justify-content-md-center">
     <div class="col-md-6">
-        <div class="table-responsive" th:if="${not #lists.isEmpty(recipe.ingredients)}">
+        <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                 <tr>
                     <th>ID</th>
                     <th>Description</th>
-                    <th>View</th>
-                    <th>Update</th>
-                    <th>Delete</th>
+<!--                    <th>Update</th>-->
+<!--                    <th>Delete</th>-->
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:remove="all">
                     <td>111</td>
                     <td>Example description 1</td>
-                    <td><a href="">View</a></td>
-                    <td><a href="">Update</a></td>
-                    <td><a href="">Delete</a></td>
-
+<!--                    <td><a href="">Update</a></td>-->
+<!--                    <td><a href="">Delete</a></td>-->
                 </tr>
                 <tr th:remove="all">
                     <td>222</td>
                     <td>Example description 2</td>
-                    <td><a href="">View</a></td>
-                    <td><a href="">Update</a></td>
-                    <td><a href="">Delete</a></td>
+<!--                    <td><a href="">Update</a></td>-->
+<!--                    <td><a href="">Delete</a></td>-->
 
                 </tr>
-                <tr th:each="ingredient : ${recipe.ingredients}">
+                <tr>
                     <td th:text="${ingredient.id}">333</td>
                     <td th:text="${(ingredient.getAmount() +
                                     ' ' + ingredient.uom.getUnitName() +
                                     ' - ' + ingredient.getDescription() )}">Example description 3</td>
-                    <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/show'}">View</a></td>
-                    <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/update'}">Update</a></td>
-                    <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/delete'}">Delete</a></td>
+<!--                    <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/update'}">Update</a></td>-->
+<!--                    <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/delete'}">Delete</a></td>-->
                 </tr>
                 </tbody>
             </table>
