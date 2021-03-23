@@ -4,6 +4,7 @@ import com.example.springrecipebook.commands.IngredientCommand;
 import com.example.springrecipebook.commands.RecipeCommand;
 import com.example.springrecipebook.services.IngredientService;
 import com.example.springrecipebook.services.RecipeService;
+import com.example.springrecipebook.services.UomService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,6 +26,8 @@ class IngredientControllerTest {
     RecipeService recipeService;
     @Mock
     IngredientService ingredientService;
+    @Mock
+    UomService uomService;
     @InjectMocks
     IngredientController ingredientController;
 
@@ -61,5 +64,16 @@ class IngredientControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/ingredient/show"))
                 .andExpect(model().attributeExists("ingredient"));
+    }
+
+    @Test
+    void testUpdateIngredient() throws Exception {
+        when(ingredientService.getCommandByIngredientIdAndRecipeId(anyLong(), anyLong())).thenReturn(new IngredientCommand());
+
+        mockMvc.perform(get("/recipe/1/ingredient/2/update"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/ingredient/ingredientForm"))
+                .andExpect(model().attributeExists("ingredient", "uomList"));
+
     }
 }
