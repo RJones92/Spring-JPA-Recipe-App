@@ -80,8 +80,22 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     private Optional<Ingredient> findIngredientFromRecipe(Recipe recipeToSearch, IngredientCommand ingredientToFind) {
-        return recipeToSearch.getIngredients().stream()
+        Optional<Ingredient> foundIngredient = recipeToSearch.getIngredients().stream()
                 .filter(ingredient -> ingredient.getId().equals(ingredientToFind.getId()))
+                .findFirst();
+
+        if (foundIngredient.isEmpty()) {
+            foundIngredient = findIngredientFromRecipeUsingFieldsOtherThanId(recipeToSearch, ingredientToFind);
+        }
+
+        return foundIngredient;
+    }
+
+    private Optional<Ingredient> findIngredientFromRecipeUsingFieldsOtherThanId(Recipe recipeToSearch, IngredientCommand ingredientToFind) {
+        return recipeToSearch.getIngredients().stream()
+                .filter(ingredient -> ingredient.getDescription().equals(ingredientToFind.getDescription()))
+                .filter(ingredient -> ingredient.getAmount().equals(ingredientToFind.getAmount()))
+                .filter(ingredient -> ingredient.getUom().getId().equals(ingredientToFind.getUom().getId()))
                 .findFirst();
     }
 
@@ -94,6 +108,8 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     private void addNewIngredientToRecipe(IngredientCommand newIngredient, Recipe recipe) {
-        recipe.addIngredient(ingredientMapper.ingredientCommandToIngredient(newIngredient));
+        Ingredient ingredient = ingredientMapper.ingredientCommandToIngredient(newIngredient);
+        ingredient.setRecipe(recipe);
+        recipe.addIngredient(ingredient);
     }
 }

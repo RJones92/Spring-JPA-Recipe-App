@@ -48,7 +48,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     @Transactional
-    public RecipeCommand getCommandById(Long id) {
+    public RecipeCommand getRecipeCommandById(Long id) {
         return recipeMapper.recipeToRecipeCommand(getRecipeById(id));
     }
 

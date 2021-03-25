@@ -15,6 +15,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.HashSet;
+
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -46,14 +48,14 @@ class IngredientControllerTest {
         RecipeCommand recipeCommand = new RecipeCommand();
         recipeCommand.setId(recipeId);
 
-        when(recipeService.getCommandById(recipeId)).thenReturn(recipeCommand);
+        when(recipeService.getRecipeCommandById(recipeId)).thenReturn(recipeCommand);
 
         mockMvc.perform(get("/recipe/"+ recipeId + "/ingredients"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/ingredient/list"))
                 .andExpect(model().attributeExists("recipe"));
 
-        verify(recipeService, times(1)).getCommandById(anyLong());
+        verify(recipeService, times(1)).getRecipeCommandById(anyLong());
     }
 
     @Test
@@ -94,5 +96,23 @@ class IngredientControllerTest {
         )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/recipe/" + recipeId + "/ingredient/" + ingredientId + "/show"));
+    }
+
+    @Test
+    void testAddingNewRecipeIngredient() throws Exception {
+        Long recipeId = 1L;
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId(recipeId);
+
+        when(recipeService.getRecipeCommandById(anyLong())).thenReturn(recipeCommand);
+        when(uomService.getAllUnitOfMeasures()).thenReturn(new HashSet<>());
+
+        mockMvc.perform(get("/recipe/" + recipeId + "/ingredient/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/ingredient/ingredientForm"))
+                .andExpect(model().attributeExists("ingredient", "uomList"));
+
+        verify(recipeService, times(1)).getRecipeCommandById(anyLong());
+        verify(uomService, times(1)).getAllUnitOfMeasures();
     }
 }
