@@ -1,14 +1,13 @@
 package com.example.springrecipebook.controllers;
 
+import com.example.springrecipebook.commands.IngredientCommand;
 import com.example.springrecipebook.services.IngredientService;
 import com.example.springrecipebook.services.RecipeService;
 import com.example.springrecipebook.services.UomService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller
@@ -20,7 +19,7 @@ public class IngredientController {
     private final UomService uomService;
 
     public IngredientController(RecipeService recipeService, IngredientService ingredientService,
-                                UomService uomService){
+                                UomService uomService) {
         this.recipeService = recipeService;
         this.ingredientService = ingredientService;
         this.uomService = uomService;
@@ -58,6 +57,16 @@ public class IngredientController {
         model.addAttribute("uomList", uomService.getAllUnitOfMeasures());
 
         return "recipe/ingredient/ingredientForm";
+    }
+
+    @PostMapping
+    @RequestMapping("/ingredient")
+    public String postRecipeIngredient(@ModelAttribute IngredientCommand ingredientCommand) {
+        IngredientCommand savedCommand = ingredientService.saveIngredientCommand(ingredientCommand);
+
+        log.debug("Saved ingredient id: {}", savedCommand.getId());
+        log.debug("Saved Recipe Id: {}", savedCommand.getRecipeId());
+        return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
     }
 
 }

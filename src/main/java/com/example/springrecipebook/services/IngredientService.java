@@ -6,4 +6,5 @@ public interface IngredientService {
 
     IngredientCommand getCommandByIngredientIdAndRecipeId(Long ingredientId, Long recipeId);
 
+    IngredientCommand saveIngredientCommand(IngredientCommand ingredientCommand);
 }
