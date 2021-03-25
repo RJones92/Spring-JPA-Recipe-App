@@ -68,18 +68,25 @@
                     </tr>
                     <tr>
                         <th>URL</th>
-                        <td><a href="#" th:href="${recipe.url}" >View Original</a></td>
+                        <td><a href="#" th:href="${recipe.url}">View Original</a></td>
                     </tr>
                     <tr>
-                        <th>Ingredients</th>
+                        <th>Ingredients (<a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}"
+                               role="button">view page</a>)
+                        </th>
                         <td>
                             <ul>
                                 <li th:each="ingredient : ${recipe.ingredients}">
                                     <div th:text="${(ingredient.getAmount() +
                                     ' ' + ingredient.uom.getUnitName() +
-                                    ' - ' + ingredient.getDescription() )}">Placeholder ingredient one</div>
+                                    ' - ' + ingredient.getDescription() )}">Placeholder ingredient one
+                                    </div>
                                 </li>
+                                <a class="btn btn-primary" href="#"
+                                   th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" role="button">View</a>
                             </ul>
+                        </td>
+                        <td>
                         </td>
                     </tr>
                     <tr>
