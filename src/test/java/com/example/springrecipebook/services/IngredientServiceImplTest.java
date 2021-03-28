@@ -75,6 +75,20 @@ class IngredientServiceImplTest {
 
     }
 
+    @Test
+    void testDeleteIngredient() throws Exception {
+        //GIVEN
+        Recipe recipe = setUpRecipeWithThreeIngredients();
+        when(recipeRepository.findById(RECIPE_ID)).thenReturn(Optional.of(recipe));
+
+        //WHEN
+        ingredientService.deleteIngredient(RECIPE_ID, INGREDIENT_ID);
+
+        //THEN
+        verify(recipeRepository, times(1)).findById(anyLong());
+        verify(recipeRepository, times(1)).save(any(Recipe.class));
+    }
+
     private Recipe setUpRecipeWithThreeIngredients() {
         Recipe recipe = new Recipe();
         recipe.setId(RECIPE_ID);

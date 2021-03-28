@@ -90,6 +90,19 @@ public class IngredientController {
         return INGREDIENT_FORM_VIEW;
     }
 
+    @GetMapping
+    @RequestMapping("/ingredient/{ingredientId}/delete")
+    public String deleteIngredient(@PathVariable String recipeId, @PathVariable String ingredientId) {
+
+        if (!isRecipeIdValid(Long.valueOf(recipeId))) {
+            //TODO throw exception if service returns null / is invalid Id
+        }
+
+        ingredientService.deleteIngredient(Long.valueOf(recipeId), Long.valueOf(ingredientId));
+
+        return "redirect:/recipe/" + recipeId + "/ingredients";
+    }
+
     private Boolean isRecipeIdValid(Long recipeId) {
         try {
             recipeService.getRecipeCommandById(recipeId);

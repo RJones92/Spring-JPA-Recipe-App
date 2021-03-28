@@ -69,7 +69,6 @@ public class IngredientServiceImpl implements IngredientService {
             } else {
                 addNewIngredientToRecipe(ingredientCommand, recipe);
             }
-
             Recipe savedRecipe = recipeRepository.save(recipe);
             //TODO check for fail
 
@@ -111,5 +110,42 @@ public class IngredientServiceImpl implements IngredientService {
         Ingredient ingredient = ingredientMapper.ingredientCommandToIngredient(newIngredient);
         ingredient.setRecipe(recipe);
         recipe.addIngredient(ingredient);
+    }
+
+    @Transactional
+    @Override
+    public void deleteIngredient(Long recipeId, Long ingredientId) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
+
+        if (recipeOptional.isEmpty()) {
+            log.debug("Recipe Id not found. Id: {}", recipeId);
+            //TODO handle error if not found
+        } else {
+            Recipe recipe = recipeOptional.get();
+            Optional<Ingredient> ingredientToDelete = findIngredientFromRecipe(recipe, ingredientId);
+
+            if (ingredientToDelete.isPresent()) {
+                deleteExistingIngredientInRecipe(recipe, ingredientToDelete.get());
+                log.debug("Ingredient deleted. Id: {}", ingredientId);
+            } else {
+                log.debug("Ingredient not found. Id: {}", ingredientToDelete.get().getId());
+                //TODO handle error if not found
+            }
+        }
+    }
+
+    private Optional<Ingredient> findIngredientFromRecipe(Recipe recipeToSearch, Long ingredientId) {
+        Optional<Ingredient> foundIngredient = recipeToSearch.getIngredients().stream()
+                .filter(ingredient -> ingredient.getId().equals(ingredientId))
+                .findFirst();
+
+        return foundIngredient;
+    }
+
+    private void deleteExistingIngredientInRecipe(Recipe recipe, Ingredient ingredientToDelete) {
+        ingredientToDelete.setRecipe(null);
+        recipe.getIngredients().remove(ingredientToDelete);
+        recipeRepository.save(recipe);
+        //TODO check for fail
     }
 }
