@@ -23,36 +23,31 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @GetMapping
-    @RequestMapping("/{recipeId}" + SHOW_RECIPE_PATH)
+    @GetMapping("/{recipeId}" + SHOW_RECIPE_PATH)
     public String getRecipeById(Model model, @PathVariable String recipeId) {
         model.addAttribute("recipe", recipeService.getRecipeById(Long.valueOf(recipeId)));
         return "recipe/show";
     }
 
-    @GetMapping
-    @RequestMapping(ADD_NEW_RECIPE_PATH)
+    @GetMapping(ADD_NEW_RECIPE_PATH)
     public String addNewRecipe(Model model) {
         model.addAttribute("recipe", new RecipeCommand());
         return "recipe/recipeForm";
     }
 
-    @GetMapping
-    @RequestMapping("/{recipeId}" + UPDATE_RECIPE_PATH)
+    @GetMapping("/{recipeId}" + UPDATE_RECIPE_PATH)
     public String updateRecipe(Model model, @PathVariable String recipeId) {
         model.addAttribute("recipe", recipeService.getRecipeCommandById(Long.valueOf(recipeId)));
         return "recipe/recipeForm";
     }
 
-    @PostMapping
-    @RequestMapping("/")
+    @PostMapping("/")
     public String postRecipe(@ModelAttribute RecipeCommand recipeCommand) {
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(recipeCommand);
         return "redirect:/recipe/" + savedCommand.getId() + SHOW_RECIPE_PATH;
     }
 
-    @GetMapping
-    @RequestMapping("/{recipeId}" + DELETE_RECIPE_PATH)
+    @GetMapping("/{recipeId}" + DELETE_RECIPE_PATH)
     public String deleteRecipe(Model model, @PathVariable String recipeId) {
         recipeService.deleteRecipeById(Long.valueOf(recipeId));
         return "redirect:/index";
