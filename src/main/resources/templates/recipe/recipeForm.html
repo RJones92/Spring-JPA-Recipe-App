@@ -26,7 +26,7 @@
             th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div class="container-fluid" style="margin-top: 20px">
+<div class="container-fluid" style="margin-top: 20px; margin-bottom: 20px">
     <div class="row justify-content-md-center">
         <h1>Edit Recipe Information</h1>
     </div>
@@ -67,7 +67,12 @@
                         </div>
                         <div class="col-md-4 form-group">
                             <label>Difficulty:</label>
-                            <select class="form-control">
+                            <select class="form-control" th:field="*{difficulty}">
+                                <option th:each="difficultyValue : ${T(com.example.springrecipebook.enums.Difficulty).values()}"
+                                th:value="${difficultyValue.name()}"
+                                th:text="${difficultyValue.name()}">value</option>
+                            </select>
+                            <select class="form-control" th:remove="all">
                                 <option>Easy</option>
                                 <option>Medium</option>
                                 <option>Hard</option>
