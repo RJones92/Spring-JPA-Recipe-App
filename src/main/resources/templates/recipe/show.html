@@ -33,7 +33,7 @@
     </div>
     <div class="row justify-content-md-center">
         <img src="../../static/images/guacamole400x400WithX.png"
-             th:src="@{/images/guacamole400x400.jpg}"
+             th:src="@{'/recipe/' + ${recipe.id} + '/showImage'}"
              width="200"
              height="200"
              style="margin-bottom: 2px">
